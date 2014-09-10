@@ -15,6 +15,7 @@
   "author": "",
   "dependencies":
   {
+    "java": "*",
     "rpc-streamx": "*",
     "stream-websocket": "*",
     "ws": "*"

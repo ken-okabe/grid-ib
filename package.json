@@ -1,19 +1,24 @@
 {
   "name": "grid-ib",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "",
   "main": "app.js",
-  "scripts": {
+  "scripts":
+  {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
+  "repository":
+  {
     "type": "git",
-    "url": "https://github.com/kenfxtrading/grid-ib"
+    "url": "https://github.com/kenokabe/grid-ib"
   },
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kenfxtrading/grid-ib/issues"
+  "dependencies":
+  {
+    "rpc-streamx": "*",
+    "stream-websocket": "*",
+    "ws": "*"
   },
-  "homepage": "https://github.com/kenfxtrading/grid-ib"
+  "devDependencies":
+  {}
 }

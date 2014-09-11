@@ -8,6 +8,7 @@ var log = function(msg)
   console.log('core:', msg);
 };
 
+
 log('0. IB-TWS app.js started');
 
 
@@ -87,6 +88,12 @@ server.listen(6000, function()
 });
 
 
+process.on('uncaughtException', function(err)
+{
+  log('Caught exception: ' + err);
+  server.close();
+
+});
 
 
 

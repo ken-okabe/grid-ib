@@ -88,13 +88,12 @@ server.listen(6000, function()
 });
 
 
-process.on('uncaughtException', function(err)
+process.on('exit', function(err)
 {
   log('Caught exception: ' + err);
   server.close();
 
 });
-
 
 
 

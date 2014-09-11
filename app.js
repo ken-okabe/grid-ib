@@ -76,6 +76,14 @@ var connect = function()
 
 server.listen(6000, function()
 { //'listening' listener
+
+  process.on('SIGTERM', function(err)
+  {
+    log('Caught exception: ' + err);
+    server.close();
+
+  });
+
   log('1. nodeTCPserver listening port:6000');
   log('2. api.tcpClientStart()');
   api.tcpClientStart();
@@ -88,12 +96,6 @@ server.listen(6000, function()
 });
 
 
-process.on('exit', function(err)
-{
-  log('Caught exception: ' + err);
-  server.close();
-
-});
 
 
 

@@ -137,7 +137,8 @@ public class Aapi implements EWrapper {
 
   String msg = "tickPrice"+"@"
            +String.valueOf(tickerId)+"@"
-           +String.valueOf(field)+"@"+String.valueOf(price)+"@";
+           +String.valueOf(field)+"@"
+           +String.valueOf(price)+"@";
   pw.println(msg);
   pw.flush();
 

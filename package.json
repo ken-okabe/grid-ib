@@ -16,9 +16,8 @@
   "dependencies":
   {
     "java": "*",
-    "rpc-streamx": "*",
-    "stream-websocket": "*",
-    "ws": "*"
+    "moment": "*",
+    "moment-timezone": "*"
   },
   "devDependencies":
   {}

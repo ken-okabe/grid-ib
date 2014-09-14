@@ -45,7 +45,7 @@ eurusd.m_exchange = "IDEALPRO";
 var usdjpy = new Contract();
 usdjpy.m_localSymbol = "USD.JPY";
 usdjpy.m_secType = "CASH";
-usdjpy.m_currency = "USD";
+usdjpy.m_currency = "JPY";
 usdjpy.m_exchange = "IDEALPRO";
 
 var __twsEvent_nextValidId = __();
@@ -62,9 +62,13 @@ var __bidEURUSD = __();
 var __askEURUSD = __();
 var __spreadEURUSD = __();
 
+var __lastTickFXTimeEURUSD = __();
+
 var __bidUSDJPY = __();
 var __askUSDJPY = __();
 var __spreadUSDJPY = __();
+
+var __lastTickFXTimeUSDJPY = __();
 
 __bidEURUSD.appear(0);
 __askEURUSD.appear(0);
@@ -181,6 +185,7 @@ __twsEvent_tickPrice
         if (__bidEURUSD.val * __askEURUSD.val != 0)
           __spreadEURUSD.appear(Math.round((__askEURUSD.val - __bidEURUSD.val) * 100000) / 10);
 
+        __lastTickFXTimeEURUSD.appear(moment().tz('Europe/London').add(2, 'hours').format('YYYY/MM/DD  HH:mm:ss   '));
         //a.lastTicktime = a.est;
       }
       if (tickerID == 20) //usdjpy
@@ -189,11 +194,10 @@ __twsEvent_tickPrice
           __bidUSDJPY.appear(price);
         if (field == TickType.ASK) //ask
           __askUSDJPY.appear(price);
-
         if (__bidUSDJPY.val * __askUSDJPY.val != 0)
-          __spreadUSDJPY.appear(Math.round((__askUSDJPY.val - __bidUSDJPY.val) * 100) / 10);
+          __spreadUSDJPY.appear(Math.round((__askUSDJPY.val - __bidUSDJPY.val) * 1000) / 10);
 
-        //a.lastTicktime = a.est;
+        __lastTickFXTimeUSDJPY.appear(moment().tz('Europe/London').add(2, 'hours').format('YYYY/MM/DD  HH:mm:ss   '));
       }
     }
 
@@ -300,17 +304,24 @@ var start = function()
         dstNY = '';
       }
 
+      clog('========================================================');
 
       clog('Tokyo    ' + tk.format('YYYY/MM/DD  HH:mm:ss  dddd  ') + '(no DST)');
       clog('FX       ' + fx.format('YYYY/MM/DD  HH:mm:ss   ') + dstFX);
       clog('London   ' + ld.format('YYYY/MM/DD  HH:mm:ss   ') + dstLD);
       clog('NewYork  ' + ny.format('YYYY/MM/DD  HH:mm:ss   ') + dstNY);
-      clog('');
-      clog('EURUSD  ' + __askEURUSD.val);
+      clog('--------------------------------------------------------');
+      clog('EURUSD  ' + __askEURUSD.val.toFixed(5));
       clog('             ' + __spreadEURUSD.val);
-      clog('        ' + __bidEURUSD.val);
+      clog('        ' + __bidEURUSD.val.toFixed(5));
+      clog('         ' + __lastTickFXTimeEURUSD.val);
 
+      clog('--------------------------------------------------------');
 
+      clog('USDJPY  ' + __askUSDJPY.val.toFixed(3));
+      clog('             ' + __spreadUSDJPY.val);
+      clog('        ' + __bidUSDJPY.val.toFixed(3));
+      clog('         ' + __lastTickFXTimeUSDJPY.val);
     });
 
 };

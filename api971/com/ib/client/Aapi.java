@@ -137,11 +137,12 @@ public class Aapi implements EWrapper {
   @Override public void tickPrice(int tickerId, int field, double price, int canAutoExecute) {
 
 //java.lang.System.out.println(tickerId);
+/*
 java.lang.System.out.println("--Java--");
 java.lang.System.out.println(field);
 java.lang.System.out.println(price);
 java.lang.System.out.println("--------");
-
+*/
   String msg = "#tickPrice"
                 +"@"+String.valueOf(tickerId)
                 +"@"+String.valueOf(field)

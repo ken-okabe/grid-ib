@@ -252,13 +252,7 @@ var tws_reqMktData = function()
   api.reqMktData(10, eurusd, GENERICTICKS, false, list);
   api.reqMktData(20, usdjpy, GENERICTICKS, false, list);
 }
-if (!String.prototype.trim)
-{
-  String.prototype.trim = function()
-  {
-    return this.toString().replace(/^\s+|\s+$/g, '');
-  };
-}
+
 
 
 String.prototype.replaceAll = function(org, dest)
@@ -266,39 +260,43 @@ String.prototype.replaceAll = function(org, dest)
   return this.split(org).join(dest);
 };
 
+
+var fs = require('fs');
 var readProtocol = function()
 {
-  var fs = require('fs');
 
   (function()
   {
     fs.readFile('R://files/EURUSD.txt', 'utf8', function(err, text)
     {
-      var text1 = text.replaceAll('\r', '@').replaceAll('\n', '@');
-      //log(text1);
-      var text1A = text1.split('@');
-      var xx = text1A[1];
-      var text2 = text1.replaceAll(xx, '');
-      var text2A = text2.split('@@');
+      try
+      {
+        var text1 = text.replaceAll('\r', '@').replaceAll('\n', '@');
+        //log(text1);
+        var text1A = text1.split('@');
+        var xx = text1A[1];
+        var text2 = text1.replaceAll(xx, '');
+        var text2A = text2.split('@@');
 
-      __protocolEURUSD.dt.appear(text2A[0].slice(2));
-      __protocolEURUSD.posString.appear(text2A[1]);
-      __protocolEURUSD.losscut.appear(text2A[2] * 1);
-      __protocolEURUSD.size.appear(text2A[3] * 1);
-      __protocolEURUSD.LC.appear(text2A[4] * 1);
+        __protocolEURUSD.dt.appear(text2A[0].slice(2));
+        __protocolEURUSD.posString.appear(text2A[1]);
+        __protocolEURUSD.losscut.appear(text2A[2] * 1);
+        __protocolEURUSD.size.appear(text2A[3] * 1);
+        __protocolEURUSD.LC.appear(text2A[4] * 1);
 
-      var d;
-      if (__protocolEURUSD.posString.val === 'long')
-        d = 1;
-      if (__protocolEURUSD.posString.val === 'short')
-        d = -1;
-      if (__protocolEURUSD.posString.val === 'flat')
-        d = 0;
+        var d;
+        if (__protocolEURUSD.posString.val === 'long')
+          d = 1;
+        if (__protocolEURUSD.posString.val === 'short')
+          d = -1;
+        if (__protocolEURUSD.posString.val === 'flat')
+          d = 0;
 
-      __protocolEURUSD.pos.appear(d * __protocolEURUSD.size.val);
+        __protocolEURUSD.pos.appear(d * __protocolEURUSD.size.val);
 
-      log(__protocolEURUSD.pos.val);
-
+      }
+      catch (e)
+      {}
     });
   })();
 
@@ -306,31 +304,33 @@ var readProtocol = function()
   {
     fs.readFile('R://files/USDJPY.txt', 'utf8', function(err, text)
     {
-      var text1 = text.replaceAll('\r', '@').replaceAll('\n', '@');
-      //log(text1);
-      var text1A = text1.split('@');
-      var xx = text1A[1];
-      var text2 = text1.replaceAll(xx, '');
-      var text2A = text2.split('@@');
+      try
+      {
+        var text1 = text.replaceAll('\r', '@').replaceAll('\n', '@');
+        //log(text1);
+        var text1A = text1.split('@');
+        var xx = text1A[1];
+        var text2 = text1.replaceAll(xx, '');
+        var text2A = text2.split('@@');
 
-      __protocolUSDJPY.dt.appear(text2A[0].slice(2));
-      __protocolUSDJPY.posString.appear(text2A[1]);
-      __protocolUSDJPY.losscut.appear(text2A[2] * 1);
-      __protocolUSDJPY.size.appear(text2A[3] * 1);
-      __protocolUSDJPY.LC.appear(text2A[4] * 1);
+        __protocolUSDJPY.dt.appear(text2A[0].slice(2));
+        __protocolUSDJPY.posString.appear(text2A[1]);
+        __protocolUSDJPY.losscut.appear(text2A[2] * 1);
+        __protocolUSDJPY.size.appear(text2A[3] * 1);
+        __protocolUSDJPY.LC.appear(text2A[4] * 1);
 
-      var d;
-      if (__protocolUSDJPY.posString.val === 'long')
-        d = 1;
-      if (__protocolUSDJPY.posString.val === 'short')
-        d = -1;
-      if (__protocolUSDJPY.posString.val === 'flat')
-        d = 0;
+        var d;
+        if (__protocolUSDJPY.posString.val === 'long')
+          d = 1;
+        if (__protocolUSDJPY.posString.val === 'short')
+          d = -1;
+        if (__protocolUSDJPY.posString.val === 'flat')
+          d = 0;
 
-      __protocolUSDJPY.pos.appear(d * __protocolUSDJPY.size.val);
-
-      log(__protocolUSDJPY.pos.val);
-
+        __protocolUSDJPY.pos.appear(d * __protocolUSDJPY.size.val);
+      }
+      catch (e)
+      {}
     });
   })();
 
